@@ -5,23 +5,21 @@ from elevenlabs import generate
 import base64
 
 def text_to_speech(text):
-    # Checking if the Arabic answer is non-empty
     if text:
-        # Setting the API key for Eleven Labs TTS service
-        elevenlabs.set_api_key("8baca584c9025aa9c7f85e0e4e8ae0c1")
-        # Generating audio from the Arabic answer using Eleven Labs TTS
-        audio = generate(
-            text=text,
-            voice="Daniel",  # Choosing the voice for the generated audio
-            model='eleven_multilingual_v2'  # Choosing the TTS model
-        )
-    else:
-        print("▶️ empty ar_answer")
+        try:
+            # Generate the audio using Eleven Labs TTS (same as before)
+            elevenlabs.set_api_key("8baca584c9025aa9c7f85e0e4e8ae0c1")
+            audio = generate(text=text, voice="Daniel", model='eleven_multilingual_v2')
+        except Exception as e:
+            print(f"An error occurred during audio generation: {e}")
+            return None
 
-    # Converting the generated audio from bytes to an AudioSegment object
-    audio = AudioSegment.from_file(io.BytesIO(audio), format="mp3")
+        try:
+            # Save the MP3 audio data to a file
+            mp3_path = 'output.mp3'
+            with open(mp3_path, 'wb') as audio_file:
+                audio_file.write(audio)
+            return  str(audio)
 
-    # Exporting the audio to an MP3 file named "output.mp3"
-    audio.export("output.mp3", format="mp3")
-
-    return audio
+        except Exception as e:
+            print(f"An error occurred during audio file handling: {e}")

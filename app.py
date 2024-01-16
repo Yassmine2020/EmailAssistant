@@ -28,10 +28,9 @@ def predict():
 
     email_summary_var = text_to_summary(translate_to_english(variable_input))
     sentiment_var = text_to_sentiment(email_summary_var)
-
     category_var = categorizer(email_summary_var)
-    email_audio_var = 'form function util 4'
-    # email_audio_var = text_to_speech(email_summary_var)
+    # email_audio_var = 'form function util 4'
+    email_audio_var = text_to_speech(email_summary_var)
 
     response['email_summary'] = email_summary_var
     response['sentiment'] = sentiment_var
