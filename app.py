@@ -5,6 +5,8 @@ from utils.categorizer import categorizer
 from utils.classify_review import classify_review
 from utils.text_to_speech import text_to_speech
 from utils.text_to_sentiment import text_to_sentiment
+from utils.best_answer import best_answer
+
 # from utils.text_to_sentiment import text_to_sentiment
 
 app = Flask(__name__)  # Corrected from _name_ to __name__
@@ -29,13 +31,16 @@ def predict():
     email_summary_var = text_to_summary(translate_to_english(variable_input))
     sentiment_var = text_to_sentiment(email_summary_var)
     category_var = categorizer(email_summary_var)
-    # email_audio_var = 'form function util 4'
-    email_audio_var = text_to_speech(email_summary_var)
+    # email_audio_var = text_to_speech(email_summary_var)
+    best_answer_var = best_answer(email_summary_var)
+    email_audio_var = 'audio'
+    # best_answer_var = 'best answer'
 
     response['email_summary'] = email_summary_var
     response['sentiment'] = sentiment_var
     response['category'] = category_var
     response['email_audio'] = email_audio_var
+    response['best_answer'] = best_answer_var
 
     return jsonify(response)  # Wrapped the response in jsonify for proper JSON formatting
 

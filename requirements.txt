@@ -13,4 +13,4 @@ transformers==4.35.2
 scipy
 ffmpeg
 tokenizers
-openai
+openai==0.28
