@@ -1,0 +1,15 @@
+torch
+gradio_client
+langdetect
+elevenlabs
+pydantic
+elevenlabs
+soundfile
+gradio_client
+langdetect
+pydub
+Flask
+transformers==4.35.2
+scipy
+ffmpeg
+tokenizers
