@@ -32,18 +32,23 @@ def predict():
     sentiment_var = text_to_sentiment(email_summary_var)
     category_var = categorizer(email_summary_var)
     # email_audio_var = text_to_speech(email_summary_var)
-    best_answer_var = best_answer(email_summary_var)
     email_audio_var = 'audio'
-    # best_answer_var = 'best answer'
+    best_answer_var = best_answer(email_summary_var)
+    # best_answer_var = 'this best answer'
+    best_answer_audio_var = 'best answer audio'
+    # best_answer_audio_var = text_to_speech(best_answer_var)
+    importance_var = 'really importante'
 
     response['email_summary'] = email_summary_var
     response['sentiment'] = sentiment_var
     response['category'] = category_var
     response['email_audio'] = email_audio_var
     response['best_answer'] = best_answer_var
+    response['best_answer_audio'] = best_answer_audio_var
+    response['importance'] = importance_var
+
 
     return jsonify(response)  # Wrapped the response in jsonify for proper JSON formatting
 
 if __name__ == '__main__':  # Corrected from _name_ and _main_ to __name__ and __main__
     app.run(host='0.0.0.0', port=6969, debug=True)
-    # text_to_speech(text)

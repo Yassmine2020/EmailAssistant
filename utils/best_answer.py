@@ -1,7 +1,8 @@
 import openai
+from .keys import openai_key
 
 # Set your OpenAI API key here
-openai.api_key = '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'
+openai.api_key = openai_key
 
 def best_answer(customer_email):
     prompt = f"Given the following email summary, generate the best response: \n {customer_email}."

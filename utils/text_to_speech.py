@@ -3,12 +3,14 @@ from pydub import AudioSegment
 import elevenlabs
 from elevenlabs import generate
 import base64
+from .keys import elevenlabs_key
 
 def text_to_speech(text):
     if text:
         try:
             # Generate the audio using Eleven Labs TTS (same as before)
-            elevenlabs.set_api_key("8baca584c9025aa9c7f85e0e4e8ae0c1")
+            key = elevenlabs_key
+            elevenlabs.set_api_key(key)
             audio = generate(text=text, voice="Daniel", model='eleven_multilingual_v2')
         except Exception as e:
             print(f"An error occurred during audio generation: {e}")
