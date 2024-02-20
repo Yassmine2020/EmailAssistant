@@ -6,8 +6,7 @@ from utils.classify_review import classify_review
 from utils.text_to_speech import text_to_speech
 from utils.text_to_sentiment import text_to_sentiment
 from utils.best_answer import best_answer
-
-# from utils.text_to_sentiment import text_to_sentiment
+from utils.importance_classifier import issue_complexity
 
 app = Flask(__name__)  # Corrected from _name_ to __name__
 
@@ -30,18 +29,16 @@ def predict():
 
     email_summary_var = text_to_summary(translate_to_english(variable_input))
     sentiment_var = text_to_sentiment(email_summary_var)
-    category_var = categorizer(email_summary_var)
-    # email_audio_var = text_to_speech(email_summary_var)
-    email_audio_var = 'audio'
+    category_var, subcat_var = categorizer(email_summary_var)[0], categorizer(email_summary_var)[1]
+    email_audio_var = text_to_speech(email_summary_var)
     best_answer_var = best_answer(email_summary_var)
-    # best_answer_var = 'this best answer'
-    best_answer_audio_var = 'best answer audio'
-    # best_answer_audio_var = text_to_speech(best_answer_var)
-    importance_var = 'really importante'
+    best_answer_audio_var = text_to_speech(best_answer_var)
+    importance_var = issue_complexity(category_var, subcat_var, sentiment_var)[0]
 
     response['email_summary'] = email_summary_var
     response['sentiment'] = sentiment_var
     response['category'] = category_var
+    response['sub_category'] = subcat_var
     response['email_audio'] = email_audio_var
     response['best_answer'] = best_answer_var
     response['best_answer_audio'] = best_answer_audio_var
